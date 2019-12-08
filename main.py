@@ -19,7 +19,6 @@ df = pd.read_csv(path, header=None)
 
 ''' Search indexes with empty values (NaN) & Remove rows '''
 
-
 print(len(df[0]))
 blank_rows = np.where(pd.isnull(df))[0]  # Return an array of rows
 # print(len(blank_rows))
@@ -29,6 +28,31 @@ blank_rows = np.where(pd.isnull(df))[0]  # Return an array of rows
 blank_rows_removed = df.drop(df.index[blank_rows], axis=0)  # Remove rows
 print(len(blank_rows_removed))
 # print(df.drop([:5, :], axis=0))
+
+
+''' Divide rows for [] '''
+
+
+''' Divide rows for - '''
+
+# Check if the number of - is identical b/w 2 columns
+
+print(df[df[0].str.contains("-")])
+print(df[df[1].str.contains("-")])
+
+
+''' Look up and remove duplicated rows  '''
+
+# Look up duplicates, it returns a Boolean Series
+duplicates = df.duplicated([0], keep='first')
+print(len(duplicates))
+
+# Returns Dataframe of True value
+print(df[df.duplicated([0], keep='first')])
+
+# Remove duplicates
+duplicates_removed = df.drop(df.index[duplicates], axis=0)
+print(len(duplicates_removed))
 
 ''' Print a specific or a range of rows '''
 
@@ -46,7 +70,20 @@ print(len(blank_rows_removed))
 
 ''' Look up for a row containing specific strings in its value '''
 
-print(df[0].str.contains('누구세요').value_counts())  # You need to index a column.
+# condition0 = df[0].str.contains('"""|\n|\r|&#39;') # They don't exist
+# condition1 = df[1].str.contains('"""|\n|\r|&#39;') # They don't exist
+# print(df.loc[condition0 == True])
+# print(df.loc[condition1 == True])
+
+'''
+
+print(df[0].str.contains('""').value_counts())  # You need to index a column.
+print(df[0].str.contains('"""').value_counts())  # You need to index a column.
+print(df[1].str.contains('""').value_counts())  # You need to index a column.
+print(df[1].str.contains('"""').value_counts())  # You need to index a column.
+
+'''
+
 # It returns Series of Boolean.
 # print(df[1].str.contains('"""').value_counts())
 
