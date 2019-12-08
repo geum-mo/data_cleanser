@@ -1,5 +1,7 @@
 # Dataset folder
-.dataset/
+dataset/
+dataset/rawDataset.csv
+dataset/test.tsv
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

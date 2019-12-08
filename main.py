@@ -17,15 +17,18 @@ df = pd.read_csv(path, header=None)
 # print(df[0])
 # print(df[1])
 
-''' Search indexes with empty values (NaN)'''
+''' Search indexes with empty values (NaN) & Remove rows '''
 
-# 1. for spec
+
 print(len(df[0]))
 blank_rows = np.where(pd.isnull(df))[0]  # Return an array of rows
-print(len(blank_rows))
+# print(len(blank_rows))
 # print(np.where(pd.isnull(df))[1]) # Return an array of columns
-print(len(df.drop(df.blank_rows, axis=0)))
-
+# print(len(df.drop(df.iloc[blank_rows, :], axis=0)))
+# print(df.iloc[blank_rows, :])
+blank_rows_removed = df.drop(df.index[blank_rows], axis=0)  # Remove rows
+print(len(blank_rows_removed))
+# print(df.drop([:5, :], axis=0))
 
 ''' Print a specific or a range of rows '''
 
@@ -42,7 +45,8 @@ print(len(df.drop(df.blank_rows, axis=0)))
 #   print(df[0].loc[22562:22566])
 
 ''' Look up for a row containing specific strings in its value '''
-# print(df[0].str.contains('"""').value_counts())  # You need to index a column.
+
+print(df[0].str.contains('누구세요').value_counts())  # You need to index a column.
 # It returns Series of Boolean.
 # print(df[1].str.contains('"""').value_counts())
 
