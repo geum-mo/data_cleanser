@@ -37,21 +37,23 @@ print(len(blank_rows_removed))
 
 # Check if the number of - is identical b/w 2 columns
 
-print(df[df[0].str.contains("-")])
-print(df[df[1].str.contains("-")])
+print(df[0].str.count('-') == df[1].str.count('-'))
+
+print((df[0].str.count('-') != df[1].str.count('-')) and ((df[0].str.count('-') or df[1].str.count('-') > 0))
+
 
 
 ''' Look up and remove duplicated rows  '''
 
 # Look up duplicates, it returns a Boolean Series
-duplicates = df.duplicated([0], keep='first')
+duplicates=df.duplicated([0], keep='first')
 print(len(duplicates))
 
 # Returns Dataframe of True value
 print(df[df.duplicated([0], keep='first')])
 
 # Remove duplicates
-duplicates_removed = df.drop(df.index[duplicates], axis=0)
+duplicates_removed=df.drop(df.index[duplicates], axis=0)
 print(len(duplicates_removed))
 
 ''' Print a specific or a range of rows '''
