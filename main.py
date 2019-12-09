@@ -119,7 +119,7 @@ print(f"={len(df)}")
 
 """ Handle -s (dashes) """
 
-    ''' Remove rows containing more than 2 -s (dashes) '''
+""" Remove rows containing more than 2 -s (dashes) """
 
 listA = df[0].str.count("-")
 listB = df[1].str.count("-")
@@ -129,9 +129,9 @@ print(
 df = df.drop(df.index[np.where(listA | listB > 2)], axis=0)
 print(f"={len(df)}")
 
-    ''' Remove first - including the whitespace on the right '''
-df = df.replace(to_replace="^-|^\s", value="", regex=True)
-print(len(df))
+""" Remove first -s including the whitespace(s) on the right """
+# print(len(df[0|1].str.contains("^-|^\s-")))
+df = df.replace(to_replace="^-|^\s-|^-\s", value="", regex=True)
 
 # print(df[0].str.contains("\S-\S"))
 # print(df[1].str.contains("\S-\S"))

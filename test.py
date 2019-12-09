@@ -29,7 +29,7 @@ df.index = range(len(df))
 # (df["A"].str.contains("- ")
 # (df["B"].str.contains("- ")
 
-print(df)
+# print(df)
 listA = df["A"].str.count("-")
 listB = df["B"].str.count("-")
 
@@ -38,10 +38,16 @@ listB = df["B"].str.count("-")
 
 # df = df.drop(df.index[np.where(listA | listB > 2)], axis=0)
 
-print(df["A"].str.count("^-\S|^-\s"))
-df = df.replace(to_replace="^-|^\s", value="", regex=True)
-print(df)
 
+df = df.replace(to_replace="^-|^\s", value="", regex=True)
+# print(df)
+
+# print(df.explode(df["A"].str.split(pat="-")))
+
+df["A"] = df["A"].str.split(pat="-")
+print(df["A"].str.split(pat="-"))
+
+print(df.explode("A"))
 
 # df = df.drop(df.index[["A"].str.count("-") > 2], axis=0)
 
