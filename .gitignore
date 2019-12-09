@@ -2,6 +2,7 @@
 dataset/
 dataset/rawDataset.csv
 dataset/rawDataset_open.csv
+dataset/rawDataset_combined.csv
 dataset/test.tsv
 
 # Byte-compiled / optimized / DLL files

@@ -116,6 +116,24 @@ df.index = range(len(df))
 # print(df)
 print(f"={len(df)}")
 
+
+""" Check if any - (dash) without a single whitespace on the right and Print """
+
+listA = df[0].str.count("-")
+listB = df[1].str.count("-")
+
+
+if listA[0] | listB[0] > 0:
+    print(
+        df[
+            (df[0].str.count("-") != df[0].str.count("- "))
+            | (df[1].str.count("-") != df[1].str.count("- "))
+        ]
+    )
+else:
+    pass
+
+
 """ Look up and remove duplicated rows """
 
 """
