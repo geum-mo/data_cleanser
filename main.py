@@ -35,7 +35,7 @@ print(len(df_official) + len(df_open) == len(df)) # If True, it's been properly 
 
 path_combined = "./dataset/rawDataset_combined.csv"
 df = pd.read_csv(path_combined, header=None)
-print(len(df))
+print(f"{len(df)} << Total length of row data")
 
 """ Indexing columns """
 # print(df.columns)
@@ -44,15 +44,16 @@ print(len(df))
 
 """ Searching indexes with empty values (NaN) & Remove rows """
 
-print(len(df[0]))
-blank_rows = np.where(pd.isnull(df))[0]  # Return an array of rows
+blank_rows = np.where(pd.isnull(df))[0]  # Returns an array of rows
+print(f"-{len(blank_rows)} << blank rows")
 # print(len(blank_rows))
 # print(np.where(pd.isnull(df))[1]) # Return an array of columns
 # print(len(df.drop(df.iloc[blank_rows, :], axis=0)))
 # print(df.iloc[blank_rows, :])
-blank_rows_removed = df.drop(df.index[blank_rows], axis=0)  # Remove rows
-print(len(blank_rows_removed))
-# print(df.drop([:5, :], axis=0))
+df = df.drop(df.index[blank_rows], axis=0)  # Removes the blank rows
+df.index = range(len(df))
+print(df)
+print(f"={len(df)}")
 
 
 """ Divide rows for [] """
@@ -62,15 +63,17 @@ print(len(blank_rows_removed))
 
 # Check if the number of - is identical b/w 2 columns
 
-print(df[0].str.count("-") == df[1].str.count("-"))
-
-print(
-    (df[0].str.count("-") != df[1].str.count("-"))
-    and ((df[0].str.count("-") or df[1].str.count("-") > 0))
-)
+noMatch = pd.DataFrame(df[0].str.count("-") != df[1].str.count("-"))
+nmIndex = noMatch[0].index[noMatch[0] == True]
+print(f"-{len(nmIndex)} << rows containing inconsistent dashes")
+df = df.drop(df.index[nmIndex], axis=0)
+df.index = range(len(df))
+print(df)
+print(len(df))
 
 """ Look up and remove duplicated rows """
 
+'''
 # Look up duplicates, it returns a Boolean Series
 duplicates = df.duplicated([0], keep="first")
 print(len(duplicates))
@@ -81,6 +84,7 @@ print(df[df.duplicated([0], keep="first")])
 # Remove duplicates
 duplicates_removed = df.drop(df.index[duplicates], axis=0)
 print(len(duplicates_removed))
+'''
 
 """ Print a specific or a range of rows """
 
