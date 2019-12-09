@@ -121,8 +121,16 @@ print(f"={len(df)}")
 
 listA = df[0].str.count("-")
 listB = df[1].str.count("-")
+print(
+    f"-{len(df.iloc[np.where(listA | listB > 2)])} << rows containing more than 2 -s (dashes)"
+)
+df = df.drop(df.index[np.where(listA | listB > 2)], axis=0)
+print(f"={len(df)}")
 
+# print(df[0].str.contains("\S-\S"))
+# print(df[1].str.contains("\S-\S"))
 
+"""
 if listA[0] | listB[0] > 0:
     print(
         df[
@@ -132,7 +140,7 @@ if listA[0] | listB[0] > 0:
     )
 else:
     pass
-
+"""
 
 """ Look up and remove duplicated rows """
 
