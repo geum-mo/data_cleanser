@@ -45,35 +45,80 @@ print(f"{len(df)} << Total length of row data")
 """ Searching indexes with empty values (NaN) & Remove rows """
 
 blank_rows = np.where(pd.isnull(df))[0]  # Returns an array of rows
-print(f"-{len(blank_rows)} << blank rows")
+
+'''
+def checkIfDuplicates_1(listOfElems):
+    """ Check if given list contains any duplicates """
+    if len(listOfElems) == len(set(listOfElems)):
+        return False
+    else:
+        return True
+
+
+result = checkIfDuplicates_1(blank_rows)
+
+if result:
+    print("Yes, list contains duplicates")
+else:
+    print("No duplicates found in list")
+'''
+
+# print(df.blank_rows)
+print(f"-{len(set(blank_rows))} << blank rows")
 # print(len(blank_rows))
 # print(np.where(pd.isnull(df))[1]) # Return an array of columns
 # print(len(df.drop(df.iloc[blank_rows, :], axis=0)))
 # print(df.iloc[blank_rows, :])
-df = df.drop(df.index[blank_rows], axis=0)  # Removes the blank rows
+# df = df.drop(df.index[blank_rows], axis=0)  # Removes the blank rows
+df = df.dropna()
 df.index = range(len(df))
-print(df)
+# print(df)
 print(f"={len(df)}")
 
 
 """ Divide rows for [] """
+
+# Check if the number of [] is identical b/w 2 columns
+
+noMatch_br1 = pd.DataFrame(df[0].str.count("\[]") != df[1].str.count("\[]"))
+nmIndex_br1 = noMatch_br1[0].index[noMatch_br1[0] == True]
+print(f"-{len(nmIndex_br1)} << rows containing inconsistent brackets ([])")
+# print(df.iloc[df.index[nmIndex_br1], :])
+df = df.drop(df.index[nmIndex_br1], axis=0)
+df.index = range(len(df))
+
+noMatch_br2 = pd.DataFrame(df[0].str.count("\[") != df[1].str.count("\["))
+nmIndex_br2 = noMatch_br2[0].index[noMatch_br2[0] == True]
+print(f"-{len(nmIndex_br2)} << rows containing inconsistent brackets ([)")
+# print(df.iloc[df.index[nmIndex_br2], :])
+df = df.drop(df.index[nmIndex_br2], axis=0)
+df.index = range(len(df))
+
+noMatch_br3 = pd.DataFrame(df[0].str.count("\]") != df[1].str.count("\]"))
+nmIndex_br3 = noMatch_br3[0].index[noMatch_br3[0] == True]
+print(f"-{len(nmIndex_br3)} << rows containing inconsistent brackets (])")
+# print(df.iloc[df.index[nmIndex_br3], :])
+df = df.drop(df.index[nmIndex_br3], axis=0)
+df.index = range(len(df))
+# print(df)
+print(f"={len(df)}")
 
 
 """ Divide rows for - """
 
 # Check if the number of - is identical b/w 2 columns
 
-noMatch = pd.DataFrame(df[0].str.count("-") != df[1].str.count("-"))
-nmIndex = noMatch[0].index[noMatch[0] == True]
-print(f"-{len(nmIndex)} << rows containing inconsistent dashes")
-df = df.drop(df.index[nmIndex], axis=0)
+noMatch_ds = pd.DataFrame(df[0].str.count("-") != df[1].str.count("-"))
+nmIndex_ds = noMatch_ds[0].index[noMatch_ds[0] == True]
+print(f"-{len(nmIndex_ds)} << rows containing inconsistent dashes")
+df = df.drop(df.index[nmIndex_ds], axis=0)
 df.index = range(len(df))
-print(df)
-print(len(df))
+# print(df)
+print(f"={len(df)}")
 
 """ Look up and remove duplicated rows """
 
-'''
+"""
 # Look up duplicates, it returns a Boolean Series
 duplicates = df.duplicated([0], keep="first")
 print(len(duplicates))
@@ -84,7 +129,7 @@ print(df[df.duplicated([0], keep="first")])
 # Remove duplicates
 duplicates_removed = df.drop(df.index[duplicates], axis=0)
 print(len(duplicates_removed))
-'''
+"""
 
 """ Print a specific or a range of rows """
 
