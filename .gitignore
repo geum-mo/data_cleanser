@@ -1,6 +1,7 @@
 # Dataset folder
 dataset/
 dataset/rawDataset.csv
+dataset/rawDataset_open.csv
 dataset/test.tsv
 
 # Byte-compiled / optimized / DLL files

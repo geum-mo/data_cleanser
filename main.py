@@ -4,20 +4,45 @@
 import numpy as np
 import pandas as pd
 
-path = "/Users/geummokang/Documents/GitHub/data_cleanser/dataset/rawDataset.csv"
-
-df = pd.read_csv(path, header=None)
-
-''' Read the following article to grasp the basic of pandas '''
-''' https://www.shanelynn.ie/using-pandas-dataframe-creating-editing-viewing-data-in-python/ '''
+""" Read the following article to grasp the basic of pandas """
+""" https://www.shanelynn.ie/using-pandas-dataframe-creating-editing-viewing-data-in-python/ """
 
 
-''' Indexing columns '''
+""" Combining multiple files (csv format) into one """
+
+"""
+path_official = "./dataset/rawDataset.csv"
+
+path_open = "./dataset/rawDataset_open.csv"
+
+path_combined = "./dataset/rawDataset_combined.csv"
+
+df_official = pd.read_csv(path_official, header=None)
+df_open = pd.read_csv(path_open, header=None)
+
+with open(path_combined, mode="a") as f:
+    df_official.to_csv(f, header=None, index=None)
+    df_open.to_csv(f, header=None, index=None)
+
+df = pd.read_csv(path_combined, header=None)
+
+# print(len(df_official))
+# print(len(df_open))
+print(len(df_official) + len(df_open) == len(df)) # If True, it's been properly combined
+"""
+
+""" Reading a combined csv file """
+
+path_combined = "./dataset/rawDataset_combined.csv"
+df = pd.read_csv(path_combined, header=None)
+print(len(df))
+
+""" Indexing columns """
 # print(df.columns)
 # print(df[0])
 # print(df[1])
 
-''' Search indexes with empty values (NaN) & Remove rows '''
+""" Searching indexes with empty values (NaN) & Remove rows """
 
 print(len(df[0]))
 blank_rows = np.where(pd.isnull(df))[0]  # Return an array of rows
@@ -30,47 +55,48 @@ print(len(blank_rows_removed))
 # print(df.drop([:5, :], axis=0))
 
 
-''' Divide rows for [] '''
+""" Divide rows for [] """
 
 
-''' Divide rows for - '''
+""" Divide rows for - """
 
 # Check if the number of - is identical b/w 2 columns
 
-print(df[0].str.count('-') == df[1].str.count('-'))
+print(df[0].str.count("-") == df[1].str.count("-"))
 
-print((df[0].str.count('-') != df[1].str.count('-')) and ((df[0].str.count('-') or df[1].str.count('-') > 0))
+print(
+    (df[0].str.count("-") != df[1].str.count("-"))
+    and ((df[0].str.count("-") or df[1].str.count("-") > 0))
+)
 
-
-
-''' Look up and remove duplicated rows  '''
+""" Look up and remove duplicated rows """
 
 # Look up duplicates, it returns a Boolean Series
-duplicates=df.duplicated([0], keep='first')
+duplicates = df.duplicated([0], keep="first")
 print(len(duplicates))
 
 # Returns Dataframe of True value
-print(df[df.duplicated([0], keep='first')])
+print(df[df.duplicated([0], keep="first")])
 
 # Remove duplicates
-duplicates_removed=df.drop(df.index[duplicates], axis=0)
+duplicates_removed = df.drop(df.index[duplicates], axis=0)
 print(len(duplicates_removed))
 
-''' Print a specific or a range of rows '''
+""" Print a specific or a range of rows """
 
 # 1. A specific row:
 #   print(df.loc[22562])
 # 2. A range of row:
 #   print(df.loc[22562:22566])
 
-''' Print a specific value or a range of value '''
+""" Print a specific value or a range of value """
 
 # 1. A specific value:
 #   print(df[0].loc[22562])
 # 2. A range of value:
 #   print(df[0].loc[22562:22566])
 
-''' Look up for a row containing specific strings in its value '''
+""" Look up for a row containing specific strings in its value """
 
 # condition0 = df[0].str.contains('"""|\n|\r|&#39;') # They don't exist
 # condition1 = df[1].str.contains('"""|\n|\r|&#39;') # They don't exist
