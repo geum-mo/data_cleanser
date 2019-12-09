@@ -6,7 +6,7 @@ import numpy as np
 
 df = pd.DataFrame(
     {
-        "A": ["-누구세요? - 나야", "누구?", "- 강금모 - 그게 누구지? - 아 진짜", "문 열라고!", "짜잔!"],
+        "A": ["-누구세요? - 나야", "누구?", "- 강금모 - 그게 누구지?", "문 열라고!", "짜잔!"],
         "B": [
             "- Who's it? - It's me.",
             "Who?",
@@ -44,10 +44,52 @@ df = df.replace(to_replace="^-|^\s", value="", regex=True)
 
 # print(df.explode(df["A"].str.split(pat="-")))
 
-df["A"] = df["A"].str.split(pat="-")
-print(df["A"].str.split(pat="-"))
+df["A"] = df["A"].str.split(pat="\s-|-\s|\s-\s")
+df["B"] = df["B"].str.split(pat="\s-|-\s|\s-\s")
 
-print(df.explode("A"))
+print(df)
+
+
+def explode(df, lst_cols, fill_value=""):
+    # make sure `lst_cols` is a list
+    if lst_cols and not isinstance(lst_cols, list):
+        lst_cols = [lst_cols]
+    # all columns except `lst_cols`
+    idx_cols = df.columns.difference(lst_cols)
+
+    # calculate lengths of lists
+    lens = df[lst_cols[0]].str.len()
+
+    if (lens > 0).all():
+        # ALL lists in cells aren't empty
+        return (
+            pd.DataFrame(
+                {
+                    col: np.repeat(df[col].values, df[lst_cols[0]].str.len())
+                    for col in idx_cols
+                }
+            )
+            .assign(**{col: np.concatenate(df[col].values) for col in lst_cols})
+            .loc[:, df.columns]
+        )
+    else:
+        # at least one list in cells is empty
+        return (
+            pd.DataFrame(
+                {
+                    col: np.repeat(df[col].values, df[lst_cols[0]].str.len())
+                    for col in idx_cols
+                }
+            )
+            .assign(**{col: np.concatenate(df[col].values) for col in lst_cols})
+            .append(df.loc[lens == 0, idx_cols])
+            .fillna(fill_value)
+            .loc[:, df.columns]
+        )
+
+
+print(explode(df, lst_cols=["A", "B"]))
+
 
 # df = df.drop(df.index[["A"].str.count("-") > 2], axis=0)
 
