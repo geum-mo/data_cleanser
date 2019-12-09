@@ -139,7 +139,7 @@ df = df.replace(to_replace="^-|^\s-|^-\s", value="", regex=True)
 df[0] = df[0].str.split(pat="\s-|-\s|\s-\s")
 df[1] = df[1].str.split(pat="\s-|-\s|\s-\s")
 
-# print(df)
+print(df)
 
 
 def explode(df, lst_cols, fill_value=""):

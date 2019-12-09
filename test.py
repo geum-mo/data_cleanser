@@ -49,6 +49,9 @@ df["B"] = df["B"].str.split(pat="\s-|-\s|\s-\s")
 
 print(df)
 
+print(list("BCDE"))
+print([0, 1, 2, 3])
+
 
 def explode(df, lst_cols, fill_value=""):
     # make sure `lst_cols` is a list
@@ -88,7 +91,7 @@ def explode(df, lst_cols, fill_value=""):
         )
 
 
-print(explode(df, lst_cols=["A", "B"]))
+print(explode(df, lst_cols=[0, 1]))
 
 
 # df = df.drop(df.index[["A"].str.count("-") > 2], axis=0)
