@@ -33,10 +33,15 @@ print(df)
 listA = df["A"].str.count("-")
 listB = df["B"].str.count("-")
 
-print(df.iloc[np.where(listA | listB > 2)])
-print(len(df.iloc[np.where(listA | listB > 2)]))
+# print(df.iloc[np.where(listA | listB > 2)])
+# print(len(df.iloc[np.where(listA | listB > 2)]))
 
-print(df.drop(df.index[np.where(listA | listB > 2)], axis=0))
+# df = df.drop(df.index[np.where(listA | listB > 2)], axis=0)
+
+print(df["A"].str.count("^-\S|^-\s"))
+df = df.replace(to_replace="^-|^\s", value="", regex=True)
+print(df)
+
 
 # df = df.drop(df.index[["A"].str.count("-") > 2], axis=0)
 
