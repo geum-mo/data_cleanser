@@ -49,10 +49,20 @@ df["B"] = df["B"].str.split(pat="\s-|-\s|\s-\s")
 
 print(df)
 
-print(list("BCDE"))
-print([0, 1, 2, 3])
+col_list = df.columns
+"""
+for col in col_list:
+    lens = df[col].str.len()
+    print(lens > 1)
+"""
 
+list = [1, 2, 3, 4]
+for i in list:
+    print(i > 2)
 
+print(pd.DataFrame(data=list) > 1)
+
+"""
 def explode(df, lst_cols, fill_value=""):
     # make sure `lst_cols` is a list
     if lst_cols and not isinstance(lst_cols, list):
@@ -92,7 +102,7 @@ def explode(df, lst_cols, fill_value=""):
 
 
 print(explode(df, lst_cols=[0, 1]))
-
+"""
 
 # df = df.drop(df.index[["A"].str.count("-") > 2], axis=0)
 
