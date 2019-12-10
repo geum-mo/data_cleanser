@@ -8,23 +8,31 @@ import pandas as pd
 """ Reading an in-progress csv file """
 
 path_inProg_main = "./dataset/inProg_main.csv"
+
 df = pd.read_csv(path_inProg_main, header=None)
 print(f"{len(df)} << Total length of in-progress(main) data")
+
 
 """ Naming columns """
 
 df.columns = ["ko", "en"]
 
-""" Checking value length in 2 columns is identical """ 
+""" Spliting rows using - (dash) as a seperater. """
+
+df["ko"] = df["ko"].str.split(pat="\s-|-\s|\s-\s")
+df["en"] = df["en"].str.split(pat="\s-|-\s|\s-\s")
+
+print(df)
+
+""" Checking value length in 2 columns is identical """
 
 list = df["ko"].str.len() != df["en"].str.len()
-print(list.value_counts())
+print(df.loc[list])
 
-"""
+df = df.drop(df["ko"].index[list], axis=0)
+
+
 def explode(df, lst_cols, fill_value=""):
-    # make sure `lst_cols` is a list
-    if lst_cols and not isinstance(lst_cols, list):
-        lst_cols = [lst_cols]
     # all columns except `lst_cols`
     idx_cols = df.columns.difference(lst_cols)
 
@@ -60,9 +68,10 @@ def explode(df, lst_cols, fill_value=""):
 
 
 df = explode(df, lst_cols=["ko", "en"])
-print(df)
-print(len(df))
-"""
+
+savePath = "./dataset/inProg_main2.csv"
+df.to_csv(savePath, index=False, header=None)
+
 
 """
 if listA[0] | listB[0] > 0:
@@ -76,17 +85,3 @@ else:
     pass
 """
 
-""" Look up and remove duplicated rows """
-
-"""
-# Look up duplicates, it returns a Boolean Series
-duplicates = df.duplicated([0], keep="first")
-print(len(duplicates))
-
-# Returns Dataframe of True value
-print(df[df.duplicated([0], keep="first")])
-
-# Remove duplicates
-duplicates_removed = df.drop(df.index[duplicates], axis=0)
-print(len(duplicates_removed))
-"""

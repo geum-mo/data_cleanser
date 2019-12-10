@@ -10,15 +10,15 @@ Task flows:
   - [x] Delete rows where each column has the unidentical number of [s (opening square bracket)
   - [x] Delete rows where each column has the unidentical number of ]s (closing square bracket)
 - [ ] Seperate rows containing multiple sentences
-  - [ ] Handle -s (dashes)
-    - [ ] Check if any - (dash) without a single whitespace on the right and Print
-    - [ ] Check if any - (dash) without a single whitespace on the left (if the dast is the first character of the value) and Print
-    - [ ] Check if any - (dash) having no string next to its whitespace on the right and Print
+  - [x] Handle -s (dashes)
+    - [x] Keep -s except being used as seperators
+    - [x] Seperate rows based on -s
+    - [ ] Make sure remaining -s are not seperators
+  - [ ] Hangle []s (square brackets)
+    - [ ] Remove whitespace in the start & end of the strings
+    - [ ] Remove emtpy brackets []
     - [ ] 
 
-
-  - [ ] Find rows containing - (dash) and Seperate into  
-  - [ ] Find rows containing [] (empty square brackets) and Remove the brackets
   - [ ] Find rows containing [*]* (square brackets followed by string) and Seperate into 
 
 - [ ] Handle special characters

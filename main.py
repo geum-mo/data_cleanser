@@ -131,14 +131,25 @@ print(f"={len(df)}")
 
 """ Remove first -s including the whitespace(s) on the right """
 # print(len(df[0|1].str.contains("^-|^\s-")))
+print(df)
 df = df.replace(to_replace="^-|^\s-|^-\s", value="", regex=True)
-
+print(df)
 # print(df[0].str.contains("\S-\S"))
 # print(df[1].str.contains("\S-\S"))
 
+savePath = "./dataset/inProg_main.csv"
+df.to_csv(savePath, index=False, header=None)
+'''
+
 df[0] = df[0].str.split(pat="\s-|-\s|\s-\s")
 df[1] = df[1].str.split(pat="\s-|-\s|\s-\s")
+print(df)
 
-savePath = "./dataset/inProg_main.csv"
 
-df.to_csv(savePath, index=False)
+savePath_type = "./dataset/types_main.csv"
+
+
+df.dtypes.to_frame("types").to_csv(savePath_type)
+
+
+'''
