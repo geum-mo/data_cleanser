@@ -18,6 +18,8 @@ df = pd.DataFrame(
     dtype="category",
 )
 
+df.columns = ["ko", "en"]
+print(df)
 # counts = df["A"].str.count("-")
 
 noMatch = pd.DataFrame(df["A"].str.count("-") != df["B"].str.count("-"))
@@ -47,20 +49,10 @@ df = df.replace(to_replace="^-|^\s", value="", regex=True)
 df["A"] = df["A"].str.split(pat="\s-|-\s|\s-\s")
 df["B"] = df["B"].str.split(pat="\s-|-\s|\s-\s")
 
-print(df)
+# print(df)
 
-col_list = df.columns
-"""
-for col in col_list:
-    lens = df[col].str.len()
-    print(lens > 1)
-"""
+# print(pd.DataFrame({col: pd.concat(df[col]) for col in df.columns}))
 
-list = [1, 2, 3, 4]
-for i in list:
-    print(i > 2)
-
-print(pd.DataFrame(data=list) > 1)
 
 """
 def explode(df, lst_cols, fill_value=""):
