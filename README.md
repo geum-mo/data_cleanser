@@ -16,10 +16,13 @@ Task flows:
     - [x] Make sure remaining -s are not seperators
   - [ ] Hangle []s (square brackets)
     - [x] Remove whitespace in the start & end of the strings
-    - [ ] Remove emtpy brackets []
-    - [ ] 
-
-  - [ ] Find rows containing [*]* (square brackets followed by string) and Seperate into 
+    - [x] Remove emtpy brackets, if any []
+    - [ ] Handle scenarios
+      - [ ] #1. [xx] --> keep as-is
+      - [ ] #2. [xx]xx --> seperate rows
+      - [ ] #3. xx[xx] --> seperate rows
+      - [ ] #4. [xx][xx] --> seperate rows
+      - [ ] #5. [xx[xx]] --> check and remove if trivial
 
 - [ ] Handle special characters
   - [ ] ?
@@ -30,6 +33,7 @@ Task flows:
   - [ ] , ,, ,,, ,,,, etc
   - [ ] []
   - [ ] {}
+
 - [ ] Remove duplicated rows
 - [ ] Create 3 tsv files for TRAIN, VALIDATION, and TEST purposes
   - [ ] For all purposes

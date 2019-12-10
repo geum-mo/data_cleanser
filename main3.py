@@ -38,6 +38,9 @@ df = df.drop(df["ko"].index[cond])
 print(len(df))
 
 
+
+
+
 """ Look up and remove duplicated rows """
 
 """
