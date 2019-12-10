@@ -13,9 +13,9 @@ Task flows:
   - [x] Handle -s (dashes)
     - [x] Keep -s except being used as seperators
     - [x] Seperate rows based on -s
-    - [ ] Make sure remaining -s are not seperators
+    - [x] Make sure remaining -s are not seperators
   - [ ] Hangle []s (square brackets)
-    - [ ] Remove whitespace in the start & end of the strings
+    - [x] Remove whitespace in the start & end of the strings
     - [ ] Remove emtpy brackets []
     - [ ] 
 

@@ -23,6 +23,21 @@ lst_bool = df["ko"].str.contains("-") | df["ko"].str.contains("-")
 index = df["ko"].index[lst_bool]
 df.loc[index, :].to_csv("./dataset/noMatch.csv", index=False, header=None)
 
+
+""" Removing leading & trailing whitespaces """
+
+df["ko"] = df["ko"].str.strip
+df["en"] = df["en"].str.strip
+
+
+""" Removing empty square brackets, if any """
+
+cond = df["ko"].str.contains("\[]") | df["en"].str.contains("\[]")
+print(df.loc[cond, :])
+df = df.drop(df["ko"].index[cond])
+print(len(df))
+
+
 """ Look up and remove duplicated rows """
 
 """
