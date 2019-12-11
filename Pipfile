@@ -10,8 +10,8 @@ black = "*"
 pandas = "*"
 black = "*"
 flake8 = "*"
-pyicu = "*"
 polyglot = "*"
+pyicu = {path = "./PyICU"}
 
 [requires]
 python_version = "3.8"

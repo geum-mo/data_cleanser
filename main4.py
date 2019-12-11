@@ -4,8 +4,10 @@
 import math
 import numpy as np
 import pandas as pd
-from polyglot.detect import Detector
+# from polyglot.detect import Detector
 
+
+pd.set_option('display.max_rows', 500)
 
 """ Reading an in-progress csv file """
 
@@ -44,4 +46,30 @@ print(f"= {len(df)}")
 for language in Detector(df).languages:
     print(language)
 """
+
+condA = df["ko"].str.len() | df["en"].str.len() > 50 
+condB = df["ko"].str.len() | df["en"].str.len() < 80
+condA1 = df["ko"].str.len() | df["en"].str.len() <= 50 
+condB1 = df["ko"].str.len() | df["en"].str.len() >= 80
+
+
+s = df.loc[condA & condB]
+ns = df.loc[condA1 | condB1]
+print(ns)
+
+print(s)
+TRAIN1 = ns
+TRAIN2 = s.sample(n=1330748, random_state=1)
+VALIDATION = s.sample(n=10000, random_state=2)
+TEST = s.sample(n=10000, random_state=3)
+
+savePath1 = "./dataset/validation.tsv"
+savePath2 = "./dataset/test.tsv"
+savePath3 = "./dataset/train1.tsv"
+savePath4 = "./dataset/train2.tsv"
+
+VALIDATION.to_csv(savePath1, sep="\t", index=False, header={"ko","en"})
+TEST.to_csv(savePath2, sep="\t", index=False, header={"ko","en"})
+TRAIN1.to_csv(savePath3, sep="\t", index=False, header={"ko","en"})
+TRAIN2.to_csv(savePath4, sep="\t", index=False, header={"ko","en"})
 
