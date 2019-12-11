@@ -44,10 +44,13 @@ print(len(df))
 """ []s """
 
 # print(df)
-cond = (df["ko"].str.count("\[") > 1) | (df["en"].str.count("\[") > 1)
+cond = (df["ko"].str.count("\[") > 0) | (df["en"].str.count("\[") > 0)
+
+
 print(df.loc[cond])
 print(len(df.loc[cond]))
 df = df.drop(df["ko"].index[cond])
+df.index = range(len(df))
 print(len(df))
 
 
@@ -63,4 +66,8 @@ print(df[df.duplicated("ko", keep="first")])
 
 # Remove duplicates
 df = df.drop(df.index[duplicates], axis=0)
+df.index = range(len(df))
 print(len(df))
+
+savePath = "./dataset/inProg_main3.csv"
+df.to_csv(savePath, index=False, header=None)

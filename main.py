@@ -127,6 +127,7 @@ print(
     f"-{len(df.iloc[np.where(listA | listB > 2)])} << rows containing more than 2 -s (dashes)"
 )
 df = df.drop(df.index[np.where(listA | listB > 2)], axis=0)
+df.index = range(len(df))
 print(f"={len(df)}")
 
 """ Remove first -s including the whitespace(s) on the right """
@@ -139,7 +140,7 @@ print(df)
 
 savePath = "./dataset/inProg_main.csv"
 df.to_csv(savePath, index=False, header=None)
-'''
+"""
 
 df[0] = df[0].str.split(pat="\s-|-\s|\s-\s")
 df[1] = df[1].str.split(pat="\s-|-\s|\s-\s")
@@ -152,4 +153,5 @@ savePath_type = "./dataset/types_main.csv"
 df.dtypes.to_frame("types").to_csv(savePath_type)
 
 
-'''
+"""
+

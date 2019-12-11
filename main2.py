@@ -30,6 +30,7 @@ list = df["ko"].str.len() != df["en"].str.len()
 print(df.loc[list])
 
 df = df.drop(df["ko"].index[list], axis=0)
+df.index = range(len(df))
 
 
 def explode(df, lst_cols, fill_value=""):
@@ -68,6 +69,7 @@ def explode(df, lst_cols, fill_value=""):
 
 
 df = explode(df, lst_cols=["ko", "en"])
+df.index = range(len(df))
 
 savePath = "./dataset/inProg_main2.csv"
 df.to_csv(savePath, index=False, header=None)
