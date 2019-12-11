@@ -4,6 +4,7 @@
 import math
 import numpy as np
 import pandas as pd
+from polyglot.detect import Detector
 
 
 """ Reading an in-progress csv file """
@@ -38,3 +39,9 @@ print(
 df = df.drop(df.loc[cond, :].index, axis=0)
 df.index = range(len(df))
 print(f"= {len(df)}")
+
+"""
+for language in Detector(df).languages:
+    print(language)
+"""
+

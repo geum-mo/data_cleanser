@@ -9,12 +9,12 @@ Task flows:
   - [x] Delete rows where each column has the unidentical number of []s (square brackets with no string inside)
   - [x] Delete rows where each column has the unidentical number of [s (opening square bracket)
   - [x] Delete rows where each column has the unidentical number of ]s (closing square bracket)
-- [ ] Seperate rows containing multiple sentences
+- [x] Seperate rows containing multiple sentences
   - [x] Handle -s (dashes)
     - [x] Keep -s except being used as seperators
     - [x] Seperate rows based on -s
     - [x] Make sure remaining -s are not seperators
-  - [ ] Hangle []s (square brackets)
+  - [x] Hangle []s (square brackets)
     - [x] Remove whitespace in the start & end of the strings
     - [x] Remove emtpy brackets, if any []
     - [ ] Handle scenarios
@@ -23,7 +23,14 @@ Task flows:
       - [ ] #3. xx[xx] --> seperate rows
       - [ ] #4. [xx][xx] --> seperate rows
       - [ ] #5. [xx[xx]] --> check and remove if trivial
+      - [x] Just removed all rows with any [ in it
 
+- [x] Handle duplicates
+  - [x] Remove rows with NaNs
+  - [x] Remove rows where string value of both columns are indentical
+  - [x] Remove rows if string length is > 108 
+  - [x] Remove duplicated based on source lang.
+  
 - [ ] Handle special characters
   - [ ] ?
     - [ ] Only one ? should exist in a single row 
@@ -34,7 +41,10 @@ Task flows:
   - [ ] []
   - [ ] {}
 
-- [ ] Remove duplicated rows
+- [ ] Detect any lang. other than Korean or English
+- [ ] 
+
+
 - [ ] Create 3 tsv files for TRAIN, VALIDATION, and TEST purposes
   - [ ] For all purposes
     - [ ] Exclude  

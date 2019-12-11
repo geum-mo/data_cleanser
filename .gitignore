@@ -1,6 +1,12 @@
 # Dataset folder
 dataset/
 
+# ICU libs
+icu/
+pyicu/
+
+# Environmental variables
+.env
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

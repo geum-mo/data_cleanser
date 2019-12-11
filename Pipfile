@@ -10,6 +10,8 @@ black = "*"
 pandas = "*"
 black = "*"
 flake8 = "*"
+pyicu = "*"
+polyglot = "*"
 
 [requires]
 python_version = "3.8"
