@@ -6,11 +6,11 @@ import numpy as np
 
 df = pd.DataFrame(
     {
-        "A": ["-누구세요? - 나야", "누구?", "- 강금모 - 그게 누구지?", "문 열라고!", "짜잔!"],
+        "A": ['""""-누구세요? - 나야""""', '누구?', '- 강금모 - 그게 누구지?', '문 열라고!', '짜잔!'],
         "B": [
-            "- Who's it? - It's me.",
+            "Who's it? - It's me.",
             "Who?",
-            "- Geummo. - Not sure who you are?",
+            '""Geummo". Not sure who you are"?',
             "Open the door!",
             "Ta-da!",
         ],
@@ -18,29 +18,57 @@ df = pd.DataFrame(
     dtype="category",
 )
 
+
+df["A"] = df["A"].str.replace('"',"'")
+df["A"] = df["A"].str.replace("''","'")
+df["A"] = df["A"].str.replace("''","'")
+
+# print(df.loc[df["A"].str.count("'")>2])
+# print(df.loc[df["A"].str.contains("''")])
+# print(df.loc[df["A"].str.contains('"')])
+
+
 print(df)
+
+
+df["B"] = df["B"].str.replace("'",'"')
+
+
+# print(df.loc[df["B"].str.contains('^("")|("")$')])
+
+df["B"] = df["B"].str.replace(r'\\w"m', r"\\w'm")
+df["B"] = df["B"].str.replace(r'\\w"re',r"\\w're")
+df["B"] = df["B"].str.replace(r'\\w"s',r"\\w's")
+df["B"] = df["B"].str.replace(r'\\w"ll',r"\\w'll")
+df["B"] = df["B"].str.replace(r'\\w"d',r"\\w'd")
+df["B"] = df["B"].str.replace(r'\\w"t',r"\\w't")
+
+print(df)
+
+'''
+df["B"] = df["B"].str.replace('..."','"...')
+df["B"] = df["B"].str.replace('."','".')
+df["B"] = df["B"].str.replace(',"','",')
+df["B"] = df["B"].str.replace('!"','"!')
+df["B"] = df["B"].str.replace('....','...')
+df["B"] = df["B"].str.replace('.....','...')
+'''
+
+'''
 
 s = df.sample(n=3)
 s1 = s.sample (n=1)
 s2 = s.drop(s1.index, axis=0)
-print(s1)
-print(s2)
+# print(s1)
+# print(s2)
 
 r = df.drop(s.index, axis=0)
 
 print(r)
 
+'''
 
-for e in s1.index:
-    if e in (s2.index) | (r.index):
-        print(f'{e} is duplicated')
-    else:
-        for e2 in s2.index:
-            if e2 in (s1.index) | (r.index):
-                print(f'{e2} is duplicated')
-            else: 
-                for e3 in r.index:
-                    if e3 in (s1.index) | (s2.index):
-                        print(f'{e3} is duplicated')
-                    else:
-                        pass
+
+# S1. i said, "sdfsf".
+# S2. "what do you mean"?
+# S3. "Did she say "What""?
