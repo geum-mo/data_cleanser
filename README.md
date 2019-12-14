@@ -50,3 +50,25 @@ Task flows:
     - [ ] Exclude  
 
 
+
+
+
+Observations: 
+
+#1 Dataset
+1-1. In main.py, check why there are blank rows.
+1-2. In main.py, keep rows where each column has different number of dashes. Some cases, it's because of hyphen.
+1-3. In main.py, keep rows where each column has more then 2 dashes in a sentense. It might help address observation #2-1. 
+(Cont'd)
+
+#2 Model
+2-1. Text in [] is not translated (ignored) --> Reason? Maybe because I seperated every sentence in dataset for train. Try to use dataset without seperation.
+2-2. Above []s are transformed as "" or just dissappear --> Reason?
+2-3. Keep notes about undesirable results from model & find the root cause --> if it's dataset for train, change the dataset.
+(Cont'd)
+
+#3 Formatting After Translation
+3-1. Detect names from the translated text (i.e. idol group, member (nicknames), fandom, TV show, song, album, location, food, culture, etc.)
+3-2. Find and Replace all
+3-3. Limit the length of line as per the size of textarea in V LIVE web page
+(Cont'd)
