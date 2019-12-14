@@ -31,6 +31,7 @@ df = pd.read_csv(path_combined, header=None)
 print(len(df_official) + len(df_open) == len(df)) # If True, it's been properly combined
 """
 
+
 """ Reading a combined csv file """
 
 path_combined = "./dataset/rawDataset_combined.csv"
@@ -45,6 +46,8 @@ print(f"{len(df)} << Total length of row data")
 """ Searching indexes with empty values (NaN) & Remove rows """
 
 blank_rows = np.where(pd.isnull(df))[0]  # Returns an array of rows
+blankDf = df.loc[blank_rows,:]
+blankDf.to_csv("./dataset/blanks.csv", header=None)
 
 '''
 def checkIfDuplicates_1(listOfElems):
@@ -76,22 +79,19 @@ df.index = range(len(df))
 print(f"={len(df)}")
 
 
-
-
-""" Divide rows for - """
+""" Handle -s (dashes) """
 
 # Check if the number of - is identical b/w 2 columns
 
 noMatch_ds = pd.DataFrame(df[0].str.count("-") != df[1].str.count("-"))
 nmIndex_ds = noMatch_ds[0].index[noMatch_ds[0] == True]
+inc = df.loc[nmIndex_ds, :]
+inc.to_csv("./dataset/inc.csv", header=None)
 print(f"-{len(nmIndex_ds)} << rows containing inconsistent dashes")
 df = df.drop(df.index[nmIndex_ds], axis=0)
 df.index = range(len(df))
 # print(df)
 print(f"={len(df)}")
-
-
-""" Handle -s (dashes) """
 
 """ Remove rows containing more than 2 -s (dashes) """
 
@@ -100,6 +100,10 @@ listB = df[1].str.count("-")
 print(
     f"-{len(df.iloc[np.where(listA | listB > 2)])} << rows containing more than 2 -s (dashes)"
 )
+
+twoDashs = df.iloc[np.where(listA | listB > 2)]
+twoDashs.to_csv("./dataset/twoDashes.csv", header=None)
+
 df = df.drop(df.index[np.where(listA | listB > 2)], axis=0)
 df.index = range(len(df))
 print(f"={len(df)}")
