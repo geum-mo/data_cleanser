@@ -50,8 +50,16 @@ df["en"] = df["en"].str.replace('""','"')
 df["en"] = df["en"].str.replace('"\s"','""')
 # df["en"] = df["en"].str.replace('?"','"?') >>> Raises an error
 
-print(df.loc[(df["ko"].str.contains('"""|""."'))|(df["en"].str.contains('"""|""."'))])
+df["en"] = df["en"].str.replace(r'\.\.\."',r'"\.\.\.')
+df["en"] = df["en"].str.replace(r'\."',r'"\.')
+df["en"] = df["en"].str.replace(r'\,"',r'"\,')
+df["en"] = df["en"].str.replace(r'\!"',r'"\!')
+df["en"] = df["en"].str.replace(r'\.\.\.\.',r'\.\.\.')
+df["en"] = df["en"].str.replace(r'\.\.\.\.\.',r'\.\.\.')
 
+# print(df.loc[(df["ko"].str.contains('"""|""."'))|(df["en"].str.contains('"""|""."'))])
+
+df.to_csv("./dataset/InProg_main5.csv", header=None)
 
 '''
 manyQuotes = df.loc[df["en"].str.count('"')>2]
@@ -62,6 +70,7 @@ doubleDouble.to_csv("./dataset/doubleDouble.csv", header=None, index=False)
 # print(df.loc[df["en"].str.contains("'")])
 '''
 
+"""
 condA = df["ko"].str.len() | df["en"].str.len() > 50 
 condB = df["ko"].str.len() | df["en"].str.len() < 80
 condA1 = df["ko"].str.len() | df["en"].str.len() <= 50 
@@ -81,7 +90,8 @@ TRAIN = df.drop(samples.index, axis=0)
 print(VAL)
 print(TEST)
 print(TRAIN)
- 
+"""
+
 """
 for e in VAL.index:
     if e in (TEST.index) | (TRAIN.index):
@@ -103,6 +113,7 @@ for e3 in TRAIN.index:
         pass
 """
 
+"""
 savePath1 = "./dataset/validation.tsv"
 savePath2 = "./dataset/test.tsv"
 savePath3 = "./dataset/train.tsv"
@@ -110,3 +121,4 @@ savePath3 = "./dataset/train.tsv"
 VAL.to_csv(savePath1, sep="\t", index=False, header={"ko","en"}, quoting=csv.QUOTE_NONE, quotechar="",  escapechar="\\")
 TEST.to_csv(savePath2, sep="\t", index=False, header={"ko","en"}, quoting=csv.QUOTE_NONE, quotechar="",  escapechar="\\")
 TRAIN.to_csv(savePath3, sep="\t", index=False, header={"ko","en"}, quoting=csv.QUOTE_NONE, quotechar="",  escapechar="\\")
+"""

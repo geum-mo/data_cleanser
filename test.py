@@ -45,14 +45,14 @@ df["B"] = df["B"].str.replace(r'\\w"t',r"\\w't")
 
 print(df)
 
-'''
-df["B"] = df["B"].str.replace('..."','"...')
-df["B"] = df["B"].str.replace('."','".')
-df["B"] = df["B"].str.replace(',"','",')
-df["B"] = df["B"].str.replace('!"','"!')
-df["B"] = df["B"].str.replace('....','...')
-df["B"] = df["B"].str.replace('.....','...')
-'''
+
+df["B"] = df["B"].str.replace(r'\.\.\."',r'"\.\.\.')
+df["B"] = df["B"].str.replace(r'\."',r'"\.')
+df["B"] = df["B"].str.replace(r'\,"',r'"\,')
+df["B"] = df["B"].str.replace(r'\!"',r'"\!')
+df["B"] = df["B"].str.replace(r'\.\.\.\.',r'\.\.\.')
+df["B"] = df["B"].str.replace(r'\.\.\.\.\.',r'\.\.\.')
+
 
 '''
 
