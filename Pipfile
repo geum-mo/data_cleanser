@@ -11,8 +11,6 @@ flake8 = "*"
 pandas = "*"
 black = "*"
 flake8 = "*"
-polyglot = "*"
-pyicu = {path = "./PyICU"}
 
 [requires]
 python_version = "3.8"
