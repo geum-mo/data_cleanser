@@ -8,3 +8,4 @@ def empty_brckts(df, col1, col2)
     df.index = range(len(df))
     print(f"={len(df)}")
     return df
+

@@ -35,3 +35,19 @@ def same_cols(df, col1, col2):
     df.index = range(len(df))
     print(f"={len(df)}")
     return df
+
+def third_lang(df):
+    df2 = pd.read_csv("./dataset/unusual.csv", header=None)
+    list = []
+    list2 =[]
+    for row in df2[57511:]:
+        list.append(row)
+    for w in list: 
+        idx = df.iloc[df[1].str.contains(w)].index
+        list2.append(idx)
+    print(set(list2))   
+    print(f"-{len(set(list2))} << # of rows containing 3rd foreign languages")
+    df = df.drop(df.iloc[list2,:],axis=0)
+    df.index = range(len(df))
+    print(f"={len(df)}")
+    return df     
