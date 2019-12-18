@@ -1,1 +1,1 @@
-print(list.loc[True])
+print(f'={len(df)}')

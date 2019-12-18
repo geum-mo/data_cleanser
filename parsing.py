@@ -3,7 +3,7 @@ import pandas as pd
 from cleaning import drop_rows 
 
 def empty_brckts(df): 
-    cond = df[col1].str.contains("\[]") | df[col2].str.contains("\[]")
+    cond = df[0].str.contains(r"\[]") | df[1].str.contains(r"\[]")
     drop_rows(df,cond,empty_brckts)
     return df
 
@@ -13,6 +13,6 @@ def incons_brckts(df):
     return df
 
 def many_brckts(df):
-    cond = df[0].str.count(r"\[") > 3 | df[1].str.contains(r"\[") > 3
+    cond = df[0].str.count(r"\[") | df[1].str.contains(r"\[") > 3
     drop_rows(df,cond,many_brckts)
     return df

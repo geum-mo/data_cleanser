@@ -9,6 +9,7 @@ def drop_rows(df, cond, fn_name):
     return df
 
 def remove_nan(df):
+    # print(f'={len(df)}')
     rows = np.where(pd.isnull(df))[0]
     idx = df.loc[rows,:]
     print(f"-{len(set(rows))} << # of rows with NaN values")
@@ -18,8 +19,9 @@ def remove_nan(df):
     return df
 
 def duplicates(df):
-    dups = df.duplicated(df[0], keep="first")
-    print(f"-{len(dups)} << # of rows with NaN values")
+    dups = df.duplicated(subset=0, keep="first")
+    length = len(dups) - dups.value_counts().loc[False]
+    print(f"-{length} << # of duplicated rows")
     df = df.drop(df.index[dups], axis=0)
     df.index = range(len(df))
     print(f"={len(df)}")
@@ -36,17 +38,28 @@ def same_cols(df):
     return df
 
 def third_lang(df):
+    # print(f'={len(df)}')
     df2 = pd.read_csv("./dataset/unusual.csv", header=None)
+    # print(df2.loc[57511:,1])
     list = []
     list2 =[]
-    for row in df2[57511:]:
+    for row in df2.loc[57511:,1]:
         list.append(row)
+    # print(list)
     for w in list: 
-        idx = df.iloc[df[1].str.contains(w)].index
-        list2.append(idx)
-    print(set(list2))   
+        cond = df[1].str.contains(w)
+        if cond.any():
+            idx = df.loc[cond].index
+            for e in idx:
+                list2.append(e)
+        else:
+            pass
+    # print(set(list2))   
     print(f"-{len(set(list2))} << # of rows containing 3rd foreign languages")
-    df = df.drop(df.iloc[list2,:],axis=0)
+    
+    # print(df.loc[set(list2),:])
+    df = df.drop(df.iloc[list2,:].index)
     df.index = range(len(df))
     print(f"={len(df)}")
-    return df     
+    # print(df)
+    return df

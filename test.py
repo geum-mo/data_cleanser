@@ -18,57 +18,8 @@ df = pd.DataFrame(
     dtype="category",
 )
 
-
-df["A"] = df["A"].str.replace('"',"'")
-df["A"] = df["A"].str.replace("''","'")
-df["A"] = df["A"].str.replace("''","'")
-
-# print(df.loc[df["A"].str.count("'")>2])
-# print(df.loc[df["A"].str.contains("''")])
-# print(df.loc[df["A"].str.contains('"')])
+text = "강금모"
 
 
-print(df)
 
-
-df["B"] = df["B"].str.replace("'",'"')
-
-
-# print(df.loc[df["B"].str.contains('^("")|("")$')])
-
-df["B"] = df["B"].str.replace(r'\\w"m', r"\\w'm")
-df["B"] = df["B"].str.replace(r'\\w"re',r"\\w're")
-df["B"] = df["B"].str.replace(r'\\w"s',r"\\w's")
-df["B"] = df["B"].str.replace(r'\\w"ll',r"\\w'll")
-df["B"] = df["B"].str.replace(r'\\w"d',r"\\w'd")
-df["B"] = df["B"].str.replace(r'\\w"t',r"\\w't")
-
-print(df)
-
-
-df["B"] = df["B"].str.replace(r'\.\.\."',r'"\.\.\.')
-df["B"] = df["B"].str.replace(r'\."',r'"\.')
-df["B"] = df["B"].str.replace(r'\,"',r'"\,')
-df["B"] = df["B"].str.replace(r'\!"',r'"\!')
-df["B"] = df["B"].str.replace(r'\.\.\.\.',r'\.\.\.')
-df["B"] = df["B"].str.replace(r'\.\.\.\.\.',r'\.\.\.')
-
-
-'''
-
-s = df.sample(n=3)
-s1 = s.sample (n=1)
-s2 = s.drop(s1.index, axis=0)
-# print(s1)
-# print(s2)
-
-r = df.drop(s.index, axis=0)
-
-print(r)
-
-'''
-
-
-# S1. i said, "sdfsf".
-# S2. "what do you mean"?
-# S3. "Did she say "What""?
+ratio = df["A"].str.len / df["B"].str.len
