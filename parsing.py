@@ -1,11 +1,18 @@
 import numpy as np
 import pandas as pd
+from cleaning import drop_rows 
 
-def empty_brckts(df, col1, col2) 
+def empty_brckts(df): 
     cond = df[col1].str.contains("\[]") | df[col2].str.contains("\[]")
-    print(f"-{len(df.loc[cond,:].index)} << # of rows containing empty brackets")
-    df = df.drop(df[col1].index[cond])
-    df.index = range(len(df))
-    print(f"={len(df)}")
+    drop_rows(df,cond,empty_brckts)
     return df
 
+def incons_brckts(df):
+    cond = df[0].str.count(r"\[") != df[1].str.contains(r"\[")
+    drop_rows(df,cond,incons_brckts)
+    return df
+
+def many_brckts(df):
+    cond = df[0].str.count(r"\[") > 3 | df[1].str.contains(r"\[") > 3
+    drop_rows(df,cond,many_brckts)
+    return df
