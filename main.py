@@ -7,7 +7,7 @@ from cleaning import *
 from parsing import * 
 from ioFile import * 
 
-df = r_tsv("test")
+df = r_tsv("test") # change filename for upload
 print(df)
 print(f'={len(df)} << Starting #')
 
@@ -21,7 +21,18 @@ df = empty_brckts(df)
 df = incons_brckts(df)
 df = many_brckts(df)
 
-print(df)
+df = many_qts(df)
+df = many_dshs(df)
+df = incons_dshs(df)
+
+df = unusuals(df)
+
+df = outliers(df)
+
+""" From here, column has been labeled """
+
+
+
 
 
 
