@@ -1,1 +1,1 @@
-print(f'={len(df)}')
+df

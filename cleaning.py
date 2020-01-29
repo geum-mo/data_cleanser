@@ -52,7 +52,7 @@ def third_lang(df):
     for row in df2.loc[57511:,1]:
         list.append(row)
     # print(list)
-    for w in list: 
+    for w in list: # Need to optimize this block 
         cond = df[1].str.contains(w)
         if cond.any():
             idx = df.loc[cond].index

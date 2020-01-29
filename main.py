@@ -7,7 +7,7 @@ from cleaning import *
 from parsing import * 
 from ioFile import * 
 
-df = r_tsv("test") # change filename for upload
+df = r_csv("rawDataset_combined") # change filename for upload
 print(df)
 print(f'={len(df)} << Starting #')
 
@@ -31,7 +31,7 @@ df = outliers(df)
 
 """ From here, column has been labeled """
 
-
+sampling(df)
 
 
 
