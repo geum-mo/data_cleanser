@@ -11,27 +11,26 @@ df = r_csv("rawDataset_combined") # change filename for upload
 print(df)
 print(f'={len(df)} << Starting #')
 
-df = remove_nan(df)
-df = duplicates(df)
-df = same_cols(df)
-df = long_sents(df)
-df = third_lang(df)
+df1 = remove_nan(df)
+df2 = duplicates(df1)
+df3 = same_cols(df2)
+df4 = long_sents(df3)
+df5 = third_lang(df4)
 
-df = empty_brckts(df)
-df = incons_brckts(df)
-df = many_brckts(df)
+df6 = empty_brckts(df5)
+df7 = incons_brckts(df6)
+df8 = many_brckts(df7)
 
-df = many_qts(df)
-df = many_dshs(df)
-df = incons_dshs(df)
+df9 = many_qts(df8)
+df10 = many_dshs(df9)
+df11 = incons_dshs(df10)
 
-df = unusuals(df)
+df12 = unusuals(df11)
 
-df = outliers(df)
+df13 = outliers(df12)
 
 """ From here, column has been labeled """
-
-sampling(df)
+sampling(df13)
 
 
 
